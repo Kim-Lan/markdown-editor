@@ -52,7 +52,7 @@ function add(tag) {
   );
   editor.focus();
   setTimeout(() => {
-    editor.setSelectionRange(start, start);
+    editor.setSelectionRange(start + tag.length + 1, start + tag.length + 1);
     editor.scrollTop = scroll;
   });
 }
