@@ -75,10 +75,24 @@ function onOpenFileChange() {
 }
 
 function onSaveButtonClick() {
+  const blob = new Blob([markdown.value], { type: "text/plain" });
+  const filename = "markdown.md";
+  const url = window.URL.createObjectURL(blob);
 
+  const downloadLink = document.createElement('a');
+  downloadLink.download = filename;
+  downloadLink.innerHTML = "Download File"
+  downloadLink.href = url;
+  downloadLink.onclick = destroyClickedElement;
+  downloadLink.style.display = "none";
+  document.body.appendChild(downloadLink);
+
+  downloadLink.click();
 }
 
-
+function destroyClickedElement(event) {
+  document.body.removeChild(event.target);
+}
 </script>
 
 <template>
