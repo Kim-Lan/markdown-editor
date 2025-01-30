@@ -6,3 +6,11 @@
 body {
   font-family: "Open Sans", sans-serif;
 }
+
+.splitpanes__pane {
+  background-color: white !important;
+}
+
+.splitpanes--vertical > .splitpanes__splitter {
+  background-color: var(--color-gray-200) !important;
+}
