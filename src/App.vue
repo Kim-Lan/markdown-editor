@@ -18,7 +18,7 @@ function onCursorChange(position) {
   <main>
     <editor-controls :cursor-position="cursorPosition" />
     <splitpanes class="default-theme !h-[calc(100vh-theme(spacing.10))]">
-      <pane>
+      <pane class="!bg-gray-100">
         <editor @cursor-change="onCursorChange" />
       </pane>
       <pane>
