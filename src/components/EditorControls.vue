@@ -56,28 +56,32 @@ function add(tag) {
 </script>
 
 <template>
-  <div class="h-10 flex overflow-x-scroll md:overflow-auto align-center justify-between text-gray-600">
+  <div class="h-10 py-2 flex overflow-x-scroll md:overflow-auto align-center justify-between text-gray-600">
     <div class="flex">
       <div class="flex gap-2 px-2 border-r border-gray-200">
         <button
+          title="Bold"
           class="hover:bg-gray-200 rounded"
           @click="surroundWith('**')"
         >
           <icon-format-bold />
         </button>
         <button
+          title="Italics"
           class=" hover:bg-gray-200 rounded"
           @click="surroundWith('*')"
         >
           <icon-format-italic />
         </button>
         <button
+          title="Underline"
           class=" hover:bg-gray-200 rounded"
           @click="surroundWith('++')"
         >
           <icon-format-underline />
         </button>
         <button
+          title="Strikethrough"
           class=" hover:bg-gray-200 rounded"
           @click="surroundWith('~~')"
         >
@@ -87,36 +91,42 @@ function add(tag) {
       
       <div class="flex gap-2 px-2 border-r border-gray-200">
         <button
+          title="Header 1"
           class=" hover:bg-gray-200 rounded"
           @click="add('#')"
         >
           <icon-format-header-1 />
         </button>
         <button
+          title="Header 2"
           class=" hover:bg-gray-200 rounded"
           @click="add('##')"
         >
           <icon-format-header-2 />
         </button>
         <button
+          title="Header 3"
           class=" hover:bg-gray-200 rounded"
           @click="add('###')"
         >
           <icon-format-header-3 />
         </button>
         <button
+          title="Header 4"
           class=" hover:bg-gray-200 rounded"
           @click="add('####')"
         >
           <icon-format-header-4 />
         </button>
         <button
+          title="Header 5"
           class=" hover:bg-gray-200 rounded"
           @click="add('#####')"
         >
           <icon-format-header-5 />
         </button>
         <button
+          title="Header 6"
           class=" hover:bg-gray-200 rounded"
           @click="add('######')"
         >
@@ -126,12 +136,14 @@ function add(tag) {
       
       <div class="flex gap-2 px-2 border-r border-gray-200">
         <button
+          title="Link"
           class=" hover:bg-gray-200 rounded"
           @click="add('[title](https://www.example.com)')"
         >
           <icon-link />
         </button>
         <button
+          title="Image"
           class=" hover:bg-gray-200 rounded"
           @click="add('![alt text](image.jpg)')"
         >
@@ -141,18 +153,21 @@ function add(tag) {
 
       <div class="flex gap-2 px-2 border-r border-gray-200">
         <button
+          title="Bulleted List"
           class=" hover:bg-gray-200 rounded"
           @click="add('-')"
         >
           <icon-format-list-bulleted />
         </button>
         <button
+          title="Numbered List"
           class=" hover:bg-gray-200 rounded"
           @click="add('1.')"
         >
           <icon-format-list-numbered />
         </button>
         <button
+          title="Checkbox List"
           class=" hover:bg-gray-200 rounded"
           @click="add('- [ ]')"
         >
@@ -162,34 +177,32 @@ function add(tag) {
       
       <div class="flex gap-2 px-2 border-r border-gray-200">
         <button
+          title="Block Quote"
           class=" hover:bg-gray-200 rounded"
           @click="add('>')"
         >
           <icon-format-quote />
         </button>
         <button
+          title="Code Block"
           class=" hover:bg-gray-200 rounded"
           @click="surroundWith('```')"
         >
           <icon-code />
-        </button>
-        <button
-          class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
-        >
-          <icon-table />
         </button>
       </div>
     </div>
 
     <div class="flex gap-2 px-2">
       <button
+        title="Open"
         class="hover:bg-gray-200 rounded"
         @click="onOpenButtonClick"
       >
         <icon-folder />
       </button>
       <button
+        title="Save"
         class="hover:bg-gray-200 rounded"
         @click="onSaveButtonClick"
       >
