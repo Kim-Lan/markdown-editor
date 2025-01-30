@@ -6,11 +6,6 @@ import EditorControls from './components/EditorControls.vue'
 import Editor from './components/Editor.vue'
 import Preview from './components/Preview.vue'
 
-const cursorPosition = ref(0);
-
-function onCursorChange(position) {
-  cursorPosition.value = position;
-}
 </script>
 
 <template>
@@ -18,7 +13,7 @@ function onCursorChange(position) {
     <editor-controls />
     <splitpanes class="default-theme !h-[calc(100vh-theme(spacing.10))]">
       <pane class="!bg-gray-100">
-        <editor @cursor-change="onCursorChange" />
+        <editor />
       </pane>
       <pane>
         <preview />

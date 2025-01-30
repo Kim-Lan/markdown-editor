@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 import { markdown } from '../stores/markdown'
 import { surroundSelection, addTag } from '../utils/utils'
 import IconFormatBold from '~icons/mdi/format-bold'
@@ -22,10 +23,6 @@ import IconTable from '~icons/mdi/table'
 import IconContentSave from '~icons/mdi/content-save'
 import IconFolder from '~icons/mdi/folder'
 
-function onButtonClick() {
-  console.log(`current cursor position: ${props.cursorPosition}`)
-}
-
 function surroundWith(tag) {
   const editor = document.getElementById('editor');
   const start = editor.selectionStart;
@@ -42,7 +39,6 @@ function surroundWith(tag) {
     editor.setSelectionRange(end + 2 * tag.length, end + 2 * tag.length);
     editor.scrollTop = scroll;
   });
-  
 }
 
 function add(tag) {
@@ -53,6 +49,36 @@ function add(tag) {
     tag
   );
 }
+
+const openFile = ref(null);
+
+function onOpenButtonClick() {
+  openFile.value.click();
+}
+
+function onOpenFileChange() {
+  const files = openFile.value.files;
+  if (files.length === 0) return;
+
+  const file = files[0];
+  const reader = new FileReader();
+
+  reader.onload = (e) => {
+    const file = e.target.result;
+    const lines = file.split(/\r\n|\n/);
+    markdown.value = lines.join('\n');
+  }
+
+  reader.onerror = (e) => alert(e.target.error.name);
+
+  reader.readAsText(file);
+}
+
+function onSaveButtonClick() {
+
+}
+
+
 </script>
 
 <template>
@@ -194,13 +220,19 @@ function add(tag) {
     </div>
 
     <div class="flex gap-2 px-2">
-      <button
+      <input
+        ref="openFile"
+        type="file"
+        class="hidden"
+        @change="onOpenFileChange"
+      />
+      <label
         title="Open"
         class="hover:bg-gray-200 rounded"
         @click="onOpenButtonClick"
       >
         <icon-folder />
-      </button>
+      </label>
       <button
         title="Save"
         class="hover:bg-gray-200 rounded"
