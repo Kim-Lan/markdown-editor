@@ -18,7 +18,8 @@ function setCursorPosition() {
   <textarea
     ref="markdownInput"
     v-model="markdown"
-    spellcheck="false"
+    id="editor"
+    autofocus="true"
     class="w-full h-full resize-none px-3 py-2 outline-none border-t border-gray-200"
     @input="setCursorPosition"
     @click="setCursorPosition"

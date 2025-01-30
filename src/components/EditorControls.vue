@@ -1,4 +1,6 @@
 <script setup>
+import { markdown } from '../stores/markdown'
+import { surroundSelection, addTag } from '../utils/utils'
 import IconFormatBold from '~icons/mdi/format-bold'
 import IconFormatItalic from '~icons/mdi/format-italic'
 import IconFormatUnderline from '~icons/mdi/format-underline'
@@ -20,40 +22,64 @@ import IconTable from '~icons/mdi/table'
 import IconContentSave from '~icons/mdi/content-save'
 import IconFolder from '~icons/mdi/folder'
 
-const props = defineProps({
-  cursorPosition: Number,
-});
-
 function onButtonClick() {
   console.log(`current cursor position: ${props.cursorPosition}`)
+}
+
+function surroundWith(tag) {
+  const editor = document.getElementById('editor');
+  const start = editor.selectionStart;
+  const end = editor.selectionEnd;
+  const scroll = editor.scrollTop;
+  markdown.value = surroundSelection(
+    markdown.value,
+    start,
+    end,
+    tag
+  );
+  editor.focus();
+  setTimeout(() => {
+    editor.setSelectionRange(end + 2 * tag.length, end + 2 * tag.length);
+    editor.scrollTop = scroll;
+  });
+  
+}
+
+function add(tag) {
+  const editor = document.getElementById('editor');
+  markdown.value = addTag(
+    markdown.value,
+    editor.selectionStart,
+    tag
+  );
 }
 </script>
 
 <template>
-  <div class="flex flex-wrap align-center justify-between p-2 text-gray-600">
+  <div class="h-10 flex overflow-x-scroll md:overflow-auto align-center justify-between text-gray-600">
     <div class="flex">
       <div class="flex gap-2 px-2 border-r border-gray-200">
         <button
           class="hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="surroundWith('**')"
         >
           <icon-format-bold />
         </button>
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="surroundWith('*')"
         >
           <icon-format-italic />
         </button>
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="surroundWith('++')"
         >
           <icon-format-underline />
         </button>
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="surroundWith('~~')"
         >
           <icon-format-strikethrough />
         </button>
@@ -62,37 +88,37 @@ function onButtonClick() {
       <div class="flex gap-2 px-2 border-r border-gray-200">
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="add('#')"
         >
           <icon-format-header-1 />
         </button>
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="add('##')"
         >
           <icon-format-header-2 />
         </button>
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="add('###')"
         >
           <icon-format-header-3 />
         </button>
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="add('####')"
         >
           <icon-format-header-4 />
         </button>
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="add('#####')"
         >
           <icon-format-header-5 />
         </button>
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="add('######')"
         >
           <icon-format-header-6 />
         </button>
@@ -101,13 +127,13 @@ function onButtonClick() {
       <div class="flex gap-2 px-2 border-r border-gray-200">
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="add('[title](https://www.example.com)')"
         >
           <icon-link />
         </button>
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="add('![alt text](image.jpg)')"
         >
           <icon-image />
         </button>
@@ -116,19 +142,19 @@ function onButtonClick() {
       <div class="flex gap-2 px-2 border-r border-gray-200">
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="add('-')"
         >
           <icon-format-list-bulleted />
         </button>
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="add('1.')"
         >
           <icon-format-list-numbered />
         </button>
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="add('- [ ]')"
         >
           <icon-format-list-checkbox />
         </button>
@@ -137,13 +163,13 @@ function onButtonClick() {
       <div class="flex gap-2 px-2 border-r border-gray-200">
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="add('>')"
         >
           <icon-format-quote />
         </button>
         <button
           class=" hover:bg-gray-200 rounded"
-          @click="onButtonClick"
+          @click="surroundWith('```')"
         >
           <icon-code />
         </button>
