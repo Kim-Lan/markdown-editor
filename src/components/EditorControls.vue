@@ -43,11 +43,18 @@ function surroundWith(tag) {
 
 function add(tag) {
   const editor = document.getElementById('editor');
+  const start = editor.selectionStart;
+  const scroll = editor.scrollTop;
   markdown.value = addTag(
     markdown.value,
-    editor.selectionStart,
+    start,
     tag
   );
+  editor.focus();
+  setTimeout(() => {
+    editor.setSelectionRange(start, start);
+    editor.scrollTop = scroll;
+  });
 }
 
 const openFile = ref(null);
