@@ -2,14 +2,14 @@
 import { ref } from 'vue'
 import { markdown } from '../stores/markdown'
 
-defineEmits(['cursorChange']);
+const emit = defineEmits(['cursorChange']);
 
 const markdownInput = ref(null);
 
 function setCursorPosition() {
-  if (textarea.value) {
-    let position = textarea.value.selectionStart;
-    emit('cursorChange', position)
+  if (markdownInput.value) {
+    let position = markdownInput.value.selectionStart;
+    emit('cursorChange', position);
   }
 }
 </script>
