@@ -22,6 +22,7 @@ import IconCode from '~icons/mdi/code'
 import IconTable from '~icons/mdi/table'
 import IconContentSave from '~icons/mdi/content-save'
 import IconFolder from '~icons/mdi/folder'
+import ThemeToggle from './ThemeToggle.vue'
 
 function surroundWith(tag) {
   const editor = document.getElementById('editor');
@@ -103,7 +104,7 @@ function destroyClickedElement(event) {
 </script>
 
 <template>
-  <div class="h-10 py-2 flex overflow-x-scroll md:overflow-auto align-center justify-between text-gray-600">
+  <div class="h-10 py-2 flex overflow-x-scroll md:overflow-auto align-center justify-between text-gray-600 dark:bg-gray-800 dark:text-gray-300">
     <div class="flex">
       <div class="flex gap-2 px-2 border-r border-gray-200">
         <button
@@ -247,13 +248,13 @@ function destroyClickedElement(event) {
         class="hidden"
         @change="onOpenFileChange"
       />
-      <label
+      <button
         title="Open"
         class="hover:bg-gray-200 rounded"
         @click="onOpenButtonClick"
       >
         <icon-folder />
-      </label>
+      </button>
       <button
         title="Save"
         class="hover:bg-gray-200 rounded"
@@ -261,6 +262,7 @@ function destroyClickedElement(event) {
       >
         <icon-content-save />
       </button>
+      <theme-toggle />
     </div>
   </div>
 </template>

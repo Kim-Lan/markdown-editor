@@ -12,10 +12,10 @@ import Preview from './components/Preview.vue'
   <main>
     <editor-controls />
     <splitpanes class="default-theme !h-[calc(100vh-theme(spacing.10))]">
-      <pane class="!bg-gray-100">
+      <pane class="!bg-gray-100 dark:!bg-gray-900 dark:text-gray-200">
         <editor />
       </pane>
-      <pane>
+      <pane class="!bg-white dark:!bg-gray-800">
         <preview />
       </pane>
     </splitpanes>
